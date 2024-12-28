@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
-import { User } from './schemas/user.schema';
+import { User, UserDocument } from './schemas/user.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { DeleteResult, Model } from 'mongoose';
 import { JwtService } from '@nestjs/jwt';
@@ -29,6 +29,23 @@ export class UserService {
 
   async findOne(id: string): Promise<UserResponse> {
     return await this.userModel.findById(id);
+  }
+
+  async update(id: string, dto: UserResponse): Promise<UserResponse> {
+    const user = await this.userModel.findById(id);
+    if (!user) {
+      throw new Error('User not found');
+    }
+
+    user.name = dto.name || user.name;
+    user.balance = dto.balance ?? user.balance;
+    await user.save();
+
+    return {
+      id: user.id,
+      name: user.name,
+      balance: user.balance,
+    };
   }
 
   async remove(id: string): Promise<DeleteResult> {

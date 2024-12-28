@@ -4,6 +4,14 @@ import { Document } from 'mongoose';
 @Schema({
   timestamps: true,
   collection: 'games',
+  toJSON: {
+    virtuals: true,
+    versionKey: false,
+    transform: (doc, ret) => {
+      ret.id = ret._id;
+      delete ret._id;
+    },
+  }
 })
 export class Game extends Document {
   @Prop({ required: true })
@@ -12,7 +20,7 @@ export class Game extends Document {
   @Prop({ required: true })
   betAmount: number;
 
-  @Prop({ required: true })
+  @Prop({ required: true, default: 3 })
   totalMines: number;
 
   @Prop({ required: true })

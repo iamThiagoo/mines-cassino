@@ -7,7 +7,7 @@ import {
 import { GameService } from './game.service';
 import { CreateGameDto } from './dto/create-game.dto';
 import { UpdateGameDto } from './dto/update-game.dto';
-import { Request, UseGuards } from '@nestjs/common';
+import { Request, UseGuards, ValidationPipe } from '@nestjs/common';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { Socket } from 'socket.io';
 
@@ -23,11 +23,14 @@ export class GameGateway {
   @SubscribeMessage('createGame')
   async create(
     @ConnectedSocket() client: Socket,
-    @MessageBody() createGameDto: CreateGameDto,
+    @MessageBody(new ValidationPipe()) createGameDto: CreateGameDto,
     @Request() req: any,
   ) {
-    await this.gameService.create(createGameDto, req.user);
-    client.emit('gameCreated', 'Game created!');
+    const game = await this.gameService.create(createGameDto, req.user);
+    client.emit('gameCreated', {
+      gameId: game.id,
+      message: "Game created successfully",
+    });
   }
 
   @SubscribeMessage('findOneGame')
