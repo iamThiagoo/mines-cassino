@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "astro-build.astro-vscode",
+    "mongodb.mongodb-vscode",
+    "humao.rest-client",
+    "andrewmcodes.tailwindcss-extension-pack",
+    "pkief.material-icon-theme",
+    "visualstudioexptteam.vscodeintellicode"
+  ],
+  "unwantedRecommendations": []
+}

@@ -1,0 +1,20 @@
+@baseUrl = http://localhost:3000
+
+# @name createUser
+POST {{baseUrl}}/user
+Content-Type: application/json
+
+{
+  "name": "Thiago"
+}
+
+###
+@userId = {{createUser.response.body.userId}}
+
+# @name getUser
+GET {{baseUrl}}/user/{{userId}}
+
+###
+
+# @name deleteUser
+DELETE {{baseUrl}}/user/{{userId}}
