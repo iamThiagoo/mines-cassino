@@ -6,13 +6,13 @@ import {
 } from '@nestjs/websockets';
 import { GameService } from './game.service';
 import { CreateGameDto } from './dto/create-game.dto';
-import { UpdateGameDto } from './dto/update-game.dto';
 import { Request, UseGuards, ValidationPipe } from '@nestjs/common';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { Socket } from 'socket.io';
+import { NewPlayDto } from './dto/new-play.dto';
 
 @UseGuards(AuthGuard)
-@WebSocketGateway({ namespace: 'game' })
+@WebSocketGateway()
 export class GameGateway {
   constructor(private readonly gameService: GameService) {}
 
@@ -20,26 +20,54 @@ export class GameGateway {
     console.log(`Client connected: ${client.id}`);
   }
 
-  @SubscribeMessage('createGame')
+  @SubscribeMessage('game:create')
   async create(
     @ConnectedSocket() client: Socket,
     @MessageBody(new ValidationPipe()) createGameDto: CreateGameDto,
     @Request() req: any,
   ) {
     const game = await this.gameService.create(createGameDto, req.user);
-    client.emit('gameCreated', {
+    client.emit('game:created', {
       gameId: game.id,
       message: "Game created successfully",
     });
   }
 
-  @SubscribeMessage('findOneGame')
-  findOne(@MessageBody() id: number) {
-    return this.gameService.findOne(id);
+  @SubscribeMessage('game:play')
+  async play(
+    @ConnectedSocket() client: Socket,
+    @MessageBody(new ValidationPipe()) play: NewPlayDto,
+    @Request() req: any,
+  ) {
+    const game = await this.gameService.play(play, req.user);
+    
+    if (game.isGameOver) {
+      client.emit('game:finished', {
+        gameId: game.id,
+        message: "Game finished",
+      });
+    } else {
+      client.emit('game:played', {
+        gameId: game.id,
+        odd: game.lastOdd,
+        hits: game.hits,
+        row: play.row,
+        col: play.col,
+        message: "Game played successfully",
+      });
+    }
   }
 
-  @SubscribeMessage('updateGame')
-  update(@MessageBody() updateGameDto: UpdateGameDto) {
-    return this.gameService.update(updateGameDto.id, updateGameDto);
+  @SubscribeMessage('game:finish')
+  async finish(
+    @ConnectedSocket() client: Socket,
+    @MessageBody(new ValidationPipe()) move: NewPlayDto,
+    @Request() req: any,
+  ) {
+    // const game = await this.gameService.newMove(move, req.user);
+    // client.emit('game:finished', {
+    //   gameId: game.id,
+    //   message: "Game created successfully",
+    // });
   }
 }
