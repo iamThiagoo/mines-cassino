@@ -11,10 +11,15 @@ Content-Type: application/json
 ###
 @userId = {{createUser.response.body.userId}}
 
+###
+@token = {{createUser.response.body.access_token}}
+
 # @name getUser
 GET {{baseUrl}}/user/{{userId}}
+Authorization: Bearer {{token}}
 
 ###
 
 # @name deleteUser
 DELETE {{baseUrl}}/user/{{userId}}
+Authorization: Bearer {{token}}

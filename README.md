@@ -10,6 +10,7 @@ Iniciar jogo
 - Verifica saldo do usuário com valor da aposta
 - Define quantas minas terá no mapa, quanto mais... maior a odd por acerto
 - abre conexão socket da aposta
+- se B.O no socket, encerra aposta, sem afetar saldo do usuário
 
 Usuário fez jogada
 - Manda message para socket para ver o resultado daquele quadrado

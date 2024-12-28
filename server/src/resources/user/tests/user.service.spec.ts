@@ -42,12 +42,12 @@ describe('UserService', () => {
       const dto: CreateUserDto = { name: 'Thiago' };
       const mockUser = { id: '1', name: 'Thiago', balance: 10000 };
       const mockToken = 'mockAccessToken';
-  
+
       userModelMock.create.mockResolvedValue(mockUser);
       jwtServiceMock.signAsync.mockResolvedValue(mockToken);
-  
+
       const result = await service.create(dto);
-  
+
       expect(result).toEqual({
         access_token: mockToken,
         userId: '1',
@@ -66,11 +66,11 @@ describe('UserService', () => {
   describe('find a user', () => {
     it('should find and return a user by id', async () => {
       const mockUser = { id: '1', name: 'Thiago', balance: 10000 };
-  
+
       userModelMock.findById.mockResolvedValue(mockUser);
-  
+
       const result = await service.findOne('1');
-  
+
       expect(result).toEqual(mockUser);
       expect(userModelMock.findById).toHaveBeenCalledWith('1');
     });
@@ -78,12 +78,15 @@ describe('UserService', () => {
 
   describe('remove a user', () => {
     it('should remove a user by id and return DeleteResult', async () => {
-      const mockDeleteResult: DeleteResult = { acknowledged: true, deletedCount: 1 };
-  
+      const mockDeleteResult: DeleteResult = {
+        acknowledged: true,
+        deletedCount: 1,
+      };
+
       userModelMock.findByIdAndDelete.mockResolvedValue(mockDeleteResult);
-  
+
       const result = await service.remove('1');
-  
+
       expect(result).toEqual(mockDeleteResult);
       expect(userModelMock.findByIdAndDelete).toHaveBeenCalledWith('1');
     });
