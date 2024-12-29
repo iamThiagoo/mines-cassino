@@ -19,7 +19,7 @@ import { GameModule } from './resources/game/game.module';
     JwtModule.register({
       global: true,
       secret: process.env.JWT_SECRET,
-      signOptions: { expiresIn: '24h' },
+      signOptions: { expiresIn: '7d' },
     }),
     UserModule,
     GameModule,

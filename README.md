@@ -13,15 +13,14 @@ Iniciar jogo
 - se B.O no socket, encerra aposta, sem afetar saldo do usuário (Não será necessário)
 
 Usuário fez jogada
-- Manda message para socket para ver o resultado daquele quadrado
+- Manda message para socket para ver o resultado daquele quadrado (FEITO)
 
 Usuário ganhou
-- Pega a odd atual, pega o valor da aposta e realiza a multiplicação
-- fecha conexão com socket da aposta
+- Pega a odd atual, pega o valor da aposta e realiza a multiplicação (FEITO)
+- fecha conexão com socket da aposta (FEITO)
 
 Usuário perdeu
-- Subtrai a valor da aposta do usuário e finaliza o jogo
-
+- Subtrai a valor da aposta do usuário e finaliza o jogo (FEITO)
 
 ODDs (Stake):
 0 = 1.00x

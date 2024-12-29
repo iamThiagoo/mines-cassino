@@ -11,7 +11,7 @@ import { Document } from 'mongoose';
       ret.id = ret._id;
       delete ret._id;
     },
-  }
+  },
 })
 export class Game extends Document {
   @Prop({ required: true })

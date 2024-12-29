@@ -9,7 +9,7 @@ import { UserModule } from '../user/user.module';
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: Game.name, schema: GameSchema }]),
-    UserModule
+    UserModule,
   ],
   providers: [GameGateway, GameService],
 })

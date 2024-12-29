@@ -1,4 +1,4 @@
 export enum GameStatus {
-    SAVE = 'S',
-    MINE = 'M'
+  SAVE = 'S',
+  MINE = 'M',
 }

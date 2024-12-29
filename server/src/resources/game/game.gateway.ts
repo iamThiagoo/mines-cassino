@@ -10,6 +10,7 @@ import { Request, UseGuards, ValidationPipe } from '@nestjs/common';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { Socket } from 'socket.io';
 import { NewPlayDto } from './dto/new-play.dto';
+import { FinishDto } from './dto/finish.dto';
 
 @UseGuards(AuthGuard)
 @WebSocketGateway()
@@ -29,7 +30,7 @@ export class GameGateway {
     const game = await this.gameService.create(createGameDto, req.user);
     client.emit('game:created', {
       gameId: game.id,
-      message: "Game created successfully",
+      message: 'Game created successfully',
     });
   }
 
@@ -40,11 +41,13 @@ export class GameGateway {
     @Request() req: any,
   ) {
     const game = await this.gameService.play(play, req.user);
-    
+
     if (game.isGameOver) {
       client.emit('game:finished', {
         gameId: game.id,
-        message: "Game finished",
+        board: game.board,
+        revealed: game.revealed,
+        message: 'Game finished',
       });
     } else {
       client.emit('game:played', {
@@ -53,7 +56,7 @@ export class GameGateway {
         hits: game.hits,
         row: play.row,
         col: play.col,
-        message: "Game played successfully",
+        message: 'Game played successfully',
       });
     }
   }
@@ -61,13 +64,17 @@ export class GameGateway {
   @SubscribeMessage('game:finish')
   async finish(
     @ConnectedSocket() client: Socket,
-    @MessageBody(new ValidationPipe()) move: NewPlayDto,
+    @MessageBody(new ValidationPipe()) finish: FinishDto,
     @Request() req: any,
   ) {
-    // const game = await this.gameService.newMove(move, req.user);
-    // client.emit('game:finished', {
-    //   gameId: game.id,
-    //   message: "Game created successfully",
-    // });
+    const { game, user } = await this.gameService.finish(finish, req.user);
+    client.emit('game:finished', {
+      gameId: game.id,
+      balance: user.balance,
+      winAmount: game.winAmount,
+      board: game.board,
+      revealed: game.revealed,
+      message: 'Game finished successfully',
+    });
   }
 }
