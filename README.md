@@ -11,7 +11,7 @@ Este projeto foi criado para explorar e recriar a dinâmica e a estratégia de u
 
 ## 🚀 Tech's
 - NestJS (Jest)
-- AstroJS
+- AstroJS with React
 - MongoDB
 - Docker
 - Socket.io

@@ -1,138 +1,44 @@
 ---
-import Layout from "../layouts/Layout.astro";
 import PulsatingButton from "@/components/ui/pulsating-button";
 import BlurFade from "@/components/ui/blur-fade";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import "@/styles/globals.css";
+import Layout from "@/layouts/Layout.astro";
+import { Image } from "astro:assets";
+import Bomb from "@/assets/images/bomb.png";
+import UsernameInputToggle from '@/components/app/index/username-input-toggle'
 ---
 
 <Layout title="Página Inicial - Mines">
-  <header class="container mx-auto max-w-7xl relative top-5">
-    <BlurFade
-      client:only="react"
-      inView={true}
-      inViewMargin="-50px"
-      delay={0.75}
-    >
-      <nav
-        class="flex justify-between items-center border-b pb-4 border-gray-600"
+  <div class="flex flex-col items-center justify-center -mt-7">
+    <div class="h-auto -mt-7 flex justify-center items-center">
+      <Image
+        src={Bomb}
+        class="filter-shadow animate-shrink ml-5"
+        alt="Logo do app, uma mina."
+      />
+    </div>
+    <div class="text-center justify-center items-center mt-3">
+      <BlurFade
+        client:only="react"
+        inView={true}
+        inViewMargin="-50px"
+        delay={1}
       >
-        <h1>
-          <a
-            href="/"
-            class="text-gray-200 flex items-center text-lg gap-x-2 font-bold hover:opacity-75"
-          >
-            <img src="/images/bomb.png" class="ml-5 w-10" />
-            Mines
-          </a>
-        </h1>
+        <h2 class="font-medium text-xl">Mines</h2>
+        <h3 class="text-4xl font-black mb-4 tracking-tighter mt-5">
+          Explore, arrisque e descubra sua sorte em cada passo!
+        </h3>
+        <p class="max-w-3xl mx-auto text-lg mb-8 font-medium text-balance">
+          Escolha seus blocos com cuidado, desvende prêmios incríveis a cada
+          clique e teste sua coragem para avançar ainda mais, mas cuidado: uma
+          mina pode encerrar sua sorte.
+        </p>
 
-        <ul class="flex items-center gap-x-8 text-gray-300">
-          <li class="cursor-pointer hover:opacity-90">Como funciona?</li>
-          <li
-            class="flex items-center gap-x-1 py-2 rounded-sm px-4 bg-gray-800"
-          >
-            Bem-vindo(a), Visitante!
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="size-7"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-              ></path>
-            </svg>
-          </li>
-        </ul>
-      </nav>
-    </BlurFade>
-  </header>
-
-  <main
-    class="container flex justify-center mx-auto max-w-7xl min-h-[calc(100vh-90px)]"
-  >
-    <section
-      class="sm:py-20 py-20 w-full relative flex-col overflow-hidden flex justify-center"
-    >
-      <div class="flex flex-col items-center justify-center -mt-7">
-        <div class="h-auto -mt-7 flex justify-center items-center">
-          <img
-            src="/images/bomb.png"
-            class="filter-shadow animate-shrink ml-5"
-          />
-        </div>
-        <div class="text-center justify-center items-center mt-3">
-          <BlurFade
-            client:only="react"
-            inView={true}
-            inViewMargin="-50px"
-            delay={1}
-          >
-            <h2 class="font-medium text-xl">Mines</h2>
-            <h3 class="text-4xl font-black mb-4 tracking-tighter mt-5">
-              Explore, arrisque e descubra sua sorte em cada passo!
-            </h3>
-            <p class="max-w-3xl mx-auto text-lg mb-8 font-medium text-balance">
-              Escolha seus blocos com cuidado, desvende prêmios incríveis a cada
-              clique e teste sua coragem para avançar ainda mais, mas cuidado:
-              uma mina pode encerrar sua sorte.
-            </p>
-
-            <div class="mx-auto flex w-full justify-center items-center">
-              <PulsatingButton>
-                Definir Usuário e Iniciar Jogo
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="ml-2 mt-0.5 size-6"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"></path>
-                </svg>
-              </PulsatingButton>
-            </div>
-
-            <!-- <div class="flex w-full max-w-lg mx-auto items-center space-x-2">
-							<Input type="text" placeholder="Insira o Nome de Usuário" />
-							<PulsatingButton>
-								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mt-0.5 size-6">
-									<path stroke-linecap="round" stroke-linejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
-								</svg>								  
-							</PulsatingButton>
-						</div> -->
-
-            <!-- <p class="text-sm max-w-xl mx-auto">Para jogar, é grátis! Liberamos um saldo de R$ 10.000 para você se divertir... Se necessário, exclua sua conta e crie uma nova para receber o saldo novamente.</p> -->
-          </BlurFade>
-        </div>
-      </div>
-
-      <footer class="text-gray-200 text-center absolute w-full bottom-2 mt-10 -ml-5">
-        <BlurFade
-          client:only="react"
-          inView={true}
-          inViewMargin="-50px"
-          delay={1.25}
-        >
-          ✌️ Created by <a
-            href="https://github.com/iamThiagoo"
-            class="text-sky-500 hover:text-sky-300 transition-all duration-200"
-            >@iamThiagoo</a
-          >
-        </BlurFade>
-      </footer>
-    </section>
-  </main>
+        <UsernameInputToggle client:only />
+      </BlurFade>
+    </div>
+  </div>
 </Layout>
 
 <style>

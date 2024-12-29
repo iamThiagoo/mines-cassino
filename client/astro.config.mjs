@@ -12,5 +12,9 @@ export default defineConfig({
       applyBaseStyles: false,
     }), 
     react()
-  ]
+  ],
+  i18n: {
+    locales: ["es", "en", "pt-br"],
+    defaultLocale: "pt-br",
+  }
 });

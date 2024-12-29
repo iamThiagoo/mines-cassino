@@ -1,0 +1,18 @@
+---
+import BlurFade from "@/components/ui/blur-fade";
+---
+
+<footer class="text-gray-200 text-center absolute w-full bottom-2 mt-10">
+    <BlurFade
+      client:only="react"
+      inView={true}
+      inViewMargin="-50px"
+      delay={1.25}
+    >
+      ✌️ Created by <a
+        href="https://github.com/iamThiagoo"
+        class="text-sky-500 hover:text-sky-300 transition-all duration-200"
+        >@iamThiagoo</a
+      >
+    </BlurFade>
+</footer>
