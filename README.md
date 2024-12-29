@@ -1,4 +1,4 @@
-# 💣 Mines - Cassino  
+# Mines - Cassino  
 
 Esse repositório contém minha versão do jogo **Mines** inspirado na versão de jogos de azar de alguns cassinos.
 

@@ -1,11 +1,20 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+import '@fontsource/inter';
+---
+
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>{title}</title>
 	</head>
 	<body>
 		<slot />
@@ -17,6 +26,8 @@
 	body {
 		margin: 0;
 		width: 100%;
-		height: 100%;
+		/* height: 100%; */
+		font-family: 'Inter', sans-serif;
+		background-color: #091018 !important;
 	}
 </style>
