@@ -2,6 +2,7 @@
 import Header from '@/components/app/header/Header.astro';
 import Footer from '@/components/app/footer/Footer.astro';
 import Favicon from '@/assets/favicon.ico';
+import { Toaster } from "@/components/ui/toaster"
 import "@/styles/globals.css";
 import '@fontsource/inter';
 
@@ -25,13 +26,14 @@ const { title } = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body>
-		<Header></Header>
+		<Header />
 		<main class="container flex justify-center mx-auto max-w-7xl min-h-[calc(100vh-90px)]">
 			<section class="sm:py-20 py-20 w-full relative flex-col overflow-hidden flex justify-center">
 				<slot />
 				<Footer />
 			</section>
 		</main>
+		<Toaster client:load />
 	</body>
 </html>
 

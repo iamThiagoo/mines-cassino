@@ -31,7 +31,7 @@ export default function PulsatingButton({
       }
       {...props}
     >
-      <div className="relative z-10 flex items-center">{children}</div>
+      <div className="relative z-10 flex items-center text-sm md:text-base">{children}</div>
       <div className="absolute left-1/2 top-1/2 size-full -translate-x-1/2 -translate-y-1/2 animate-pulse rounded-lg bg-inherit" />
     </button>
   );

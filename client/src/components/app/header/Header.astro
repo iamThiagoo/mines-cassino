@@ -2,14 +2,15 @@
 import BlurFade from "@/components/ui/blur-fade";
 import HowWorksDialog from '@/components/app/dialog/how-works'
 import UserCard from '@/components/app/card/UserCard.astro'
+import BurgerMenu from '@/components/app/menu/burguer-menu'
 import Bomb from '@/assets/images/bomb.png'
 import { Image } from "astro:assets";
 ---
 
-<header class="container mx-auto max-w-7xl relative top-5">
+<header class="container mx-auto max-w-7xl relative top-3 sm:top-5">
   <BlurFade client:only="react" inView={true} inViewMargin="-50px" delay={0.75}>
     <nav
-      class="flex justify-between items-center border-b pb-4 border-gray-600"
+      class="flex justify-between items-center border-b pb-2 border-gray-600 sm:pb-4"
     >
       <h1>
         <a
@@ -21,10 +22,16 @@ import { Image } from "astro:assets";
         </a>
       </h1>
 
-      <ul class="flex items-center gap-x-8 text-gray-300">
+      <!-- Menu para dispositivos maiores -->
+      <ul class="hidden md:flex items-center gap-x-8 text-gray-300 mr-3">
         <HowWorksDialog client:load />
         <UserCard />
       </ul>
+
+      <!-- Menu Hambúrguer -->
+      <div class="md:hidden">
+        <BurgerMenu client:load />
+      </div>
     </nav>
   </BlurFade>
 </header>
