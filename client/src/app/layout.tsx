@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Footer from "@/components/footer/footer";
+import Footer from "@/components/layout/footer/footer";
 import { Toaster } from "@/components/ui/toaster";
-import Header from "@/components/header/header";
+import Header from "@/components/layout/header/header";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} antialiased bg-[#091018]`}>
+      <body className={`${inter.className} antialiased bg-background`}>
         <Header />
         <main className="container flex justify-center mx-auto max-w-7xl min-h-[calc(100vh-90px)]">
           <section className="sm:py-20 py-20 w-full relative flex-col overflow-hidden flex justify-center">

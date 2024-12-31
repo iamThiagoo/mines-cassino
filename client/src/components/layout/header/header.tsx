@@ -1,7 +1,7 @@
 'use client';
 
 import Image from "next/image";
-import BlurFade from "../ui/blur-fade";
+import BlurFade from "@/components/ui/blur-fade";
 import HowWorksDialog from "../dialog/how-works";
 import Bomb from "@/assets/images/bomb.png";
 import UserCard from "../card/user-card";
@@ -23,6 +23,7 @@ const Header = () => {
                 src={Bomb}
                 className="ml-5 w-10"
                 alt="Logo do app, uma mina."
+                priority={true}
               />
               Mines
             </a>

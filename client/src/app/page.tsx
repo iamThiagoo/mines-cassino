@@ -1,11 +1,11 @@
-import UsernameInputToggle from "@/components/index/username-input-toggle";
+import UsernameInputGroup from "@/components/layout/input/username-input-group";
 import BlurFade from "@/components/ui/blur-fade";
 import Image from "next/image";
 import Bomb from '@/assets/images/bomb.png';
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Embarque nessa aventura | Mines',
+  title: 'Embarque nessa Aventura | Mines',
   description: '...',
 }
 
@@ -34,7 +34,7 @@ export default function Home() {
             clique e teste sua coragem para avançar ainda mais, mas cuidado: uma
             mina pode encerrar sua sorte.
           </p>
-          <UsernameInputToggle />
+          <UsernameInputGroup />
         </BlurFade>
       </div>
     </div>
