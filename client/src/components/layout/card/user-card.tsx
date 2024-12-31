@@ -9,7 +9,7 @@ const UserCard = () => {
 
   useEffect(() => {
     const fetchUserData = async () => {
-      const username = getCookie('username') || "Visitante";
+      const username = (getCookie('username') as string) || "Visitante";
       const hour = new Date().getHours();
       let greetingMessage;
       
