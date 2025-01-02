@@ -25,7 +25,7 @@ export default function RootLayout({
       <body className={`${inter.className} antialiased bg-background`}>
         <Header />
         <main className="container flex justify-center mx-auto max-w-7xl min-h-[calc(100vh-90px)]">
-          <section className="sm:py-20 py-20 w-full relative flex-col overflow-hidden flex justify-center">
+          <section className="sm:pt-6 pb-14 py-20 w-full relative flex-col overflow-hidden flex justify-center">
             {children}
             <Footer />
           </section>

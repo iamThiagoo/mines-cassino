@@ -9,9 +9,9 @@ export default {
   ],
   theme: {
   	extend: {
-		gridTemplateColumns: {
-			'game': '400px 1fr',
-		},
+  		gridTemplateColumns: {
+  			game: '400px 1fr'
+  		},
   		colors: {
   			background: '#091018',
   			foreground: 'hsl(var(--foreground))',
@@ -61,27 +61,48 @@ export default {
   		},
   		animation: {
   			pulse: 'pulse var(--duration) ease-out infinite',
-			shrink: 'shrink 2s ease-in-out forwards',
+  			shrink: 'shrink 2s ease-in-out forwards',
+  			'shimmer-slide': 'shimmer-slide var(--speed) ease-in-out infinite alternate',
+  			'spin-around': 'spin-around calc(var(--speed) * 2) infinite linear'
   		},
   		keyframes: {
-			shrink: {
-				'0%': {
-					width: '100%',
-					position: 'relative',
-					top: '100px',
-				},
-				'100%': {
-					width: '25%',
-					position: 'relative',
-					top: '0px',
-				}
-			},
+  			shrink: {
+  				'0%': {
+  					width: '100%',
+  					position: 'relative',
+  					top: '100px'
+  				},
+  				'100%': {
+  					width: '25%',
+  					position: 'relative',
+  					top: '0px'
+  				}
+  			},
   			pulse: {
   				'0%, 100%': {
   					boxShadow: '0 0 0 0 var(--pulse-color)'
   				},
   				'50%': {
   					boxShadow: '0 0 0 8px var(--pulse-color)'
+  				}
+  			},
+  			'shimmer-slide': {
+  				to: {
+  					transform: 'translate(calc(100cqw - 100%), 0)'
+  				}
+  			},
+  			'spin-around': {
+  				'0%': {
+  					transform: 'translateZ(0) rotate(0)'
+  				},
+  				'15%, 35%': {
+  					transform: 'translateZ(0) rotate(90deg)'
+  				},
+  				'65%, 85%': {
+  					transform: 'translateZ(0) rotate(270deg)'
+  				},
+  				'100%': {
+  					transform: 'translateZ(0) rotate(360deg)'
   				}
   			}
   		}

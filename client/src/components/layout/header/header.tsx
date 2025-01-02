@@ -37,9 +37,7 @@ const Header = () => {
             <HowWorksDialog />
             <UserCard />
 
-            {isLogged && (
-              <ExitDeleteAccount />
-            )}
+            {isLogged && <ExitDeleteAccount />}
           </ul>
 
           <div className="flex md:hidden">

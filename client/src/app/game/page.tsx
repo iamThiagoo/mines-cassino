@@ -10,9 +10,9 @@ export const metadata: Metadata = {
 
 export default function Game() {
   return (
-    <div className="mt-3 px-2 md:px-0">
+    <div className="mt-3 px-1 md:px-0">
       <BlurFade inView={true} inViewMargin="-50px" delay={1}>
-        <div className="text-gray-100 grid grid-cols-1 px-6 md:grid-cols-game gap-4">
+        <div className="text-gray-100 grid grid-cols-1 px-2 md:grid-cols-game gap-4 min-h-[calc(100vh-30vh)]">
           <BoardPanel />
           <Board />
         </div>

@@ -11,10 +11,10 @@ Este projeto foi criado para explorar e recriar a dinâmica e a estratégia de u
 
 ## 🚀 Tech's
 - NestJS (Jest)
-- NextJS
+- NextJS (Shadcn Ui)
 - MongoDB
 - Docker
-- Socket.io
+- Websocket
 
 ---
 

@@ -1,5 +1,4 @@
 'use client';
-
 import {
   AlertDialog,
   AlertDialogAction,
@@ -14,9 +13,15 @@ import {
 import { toast } from "@/hooks/use-toast";
 import { deleteCookie, getCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const ExitDeleteAccountDialog = () => {
+  const [isClient, setIsClient] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const handleExitDeleteAccount = async () => {
     try {
@@ -47,6 +52,8 @@ const ExitDeleteAccountDialog = () => {
       });
     }
   };
+
+  if (!isClient) return null;
 
   return (
     <AlertDialog>

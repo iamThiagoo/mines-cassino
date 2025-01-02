@@ -15,7 +15,9 @@ const UsernameInputToggle = () => {
   const router = useRouter();
 
   async function createUser(name: string): Promise<void> {
-    if (!name.trim()) {
+    let nameFormat : string = name.trim();
+
+    if (!nameFormat) {
       toast({
         variant: "destructive",
         title: "Opsss...",
@@ -30,7 +32,7 @@ const UsernameInputToggle = () => {
       const response = await fetch(`${process.env.NEXT_PUBLIC_NEST_URL}/user`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name }),
+        body: JSON.stringify({ name: nameFormat }),
       });
       const data = await response.json();
       if (!response.ok)
