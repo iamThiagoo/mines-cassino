@@ -6,12 +6,13 @@ import PulsatingButton from "@/components/ui/pulsating-button";
 import { toast } from "@/hooks/use-toast";
 import { setCookie } from "cookies-next/client";
 import { getCookie } from "cookies-next";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 
 const UsernameInputToggle = () => {
   const [showUsernameInput, setShowUsernameInput] = useState(false);
   const [username, setUsername] = useState("");
   const [isPosting, setIsPosting] = useState(false);
+  const router = useRouter();
 
   async function createUser(name: string): Promise<void> {
     if (!name.trim()) {
@@ -43,8 +44,9 @@ const UsernameInputToggle = () => {
       setCookie('token', data.access_token, cookieOptions);
 
       toast({ title: "Usuário criado com sucesso!" });
-      redirect('/game');
+      router.push('/game');
     } catch (error: any) {
+      console.log(error);
       toast({
         variant: "destructive",
         title: "Opsss... Algo deu errado!",

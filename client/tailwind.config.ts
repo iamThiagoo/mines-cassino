@@ -9,6 +9,9 @@ export default {
   ],
   theme: {
   	extend: {
+		gridTemplateColumns: {
+			'game': '400px 1fr',
+		},
   		colors: {
   			background: '#091018',
   			foreground: 'hsl(var(--foreground))',

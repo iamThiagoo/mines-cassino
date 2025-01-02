@@ -5,10 +5,14 @@ import BlurFade from "@/components/ui/blur-fade";
 import HowWorksDialog from "../dialog/how-works";
 import Bomb from "@/assets/images/bomb.png";
 import UserCard from "../card/user-card";
+import ExitDeleteAccount from "@/components/layout/dialog/exit-delete-account";
 import { useState } from "react";
+import { get } from "http";
+import { getCookie } from "cookies-next";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isLogged, setIsLogged] = useState(!!getCookie('token'));
   
   return (
     <header className="container mx-auto max-w-7xl relative top-2 sm:top-5">
@@ -32,6 +36,10 @@ const Header = () => {
           <ul className="hidden md:flex items-center gap-x-8 text-gray-300 mr-3">
             <HowWorksDialog />
             <UserCard />
+
+            {isLogged && (
+              <ExitDeleteAccount />
+            )}
           </ul>
 
           <div className="flex md:hidden">
