@@ -2,6 +2,9 @@
 
 Esse repositório contém minha versão do jogo **Mines** inspirado na versão de jogos de azar de alguns cassinos.
 
+## Preview's
+![Preview 1](assets/preview.gif)
+
 ## 🎮 Sobre o Jogo  
 No Mines, os jogadores escolhem células em uma grade para evitar minas escondidas e ganhar multiplicadores. Cada célula segura aumenta os ganhos potenciais, mas o risco de encontrar uma mina também cresce.  
 
