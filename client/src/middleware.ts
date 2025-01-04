@@ -4,12 +4,14 @@ import jwt from "jsonwebtoken";
 import { jwtDecode } from 'jwt-decode';
 
 export async function middleware(request: NextRequest) {
+
+    if (request.nextUrl.pathname.startsWith('/api')) {
+        return NextResponse.next()
+    }
+
     const token = request.cookies.get('token')?.value;
-
     if (!token && request.nextUrl.pathname == '/') return NextResponse.next();
-
-    if (!token && request.nextUrl.pathname !== '/')
-        return NextResponse.redirect(new URL('/', request.url));
+    if (!token && request.nextUrl.pathname !== '/') return NextResponse.redirect(new URL('/', request.url));
 
     try {
         const decoded = jwtDecode(token as string);
@@ -24,7 +26,7 @@ export async function middleware(request: NextRequest) {
         }
 
         if (!decoded) {
-            console.warn('Token inválido.');
+            console.warn('Inválid Token.');
             return NextResponse.redirect(new URL('/', request.url));
         }
 
@@ -34,7 +36,7 @@ export async function middleware(request: NextRequest) {
 
         return NextResponse.next();   
     } catch (error) {
-        console.error('Erro ao verificar token:', error);
+        console.error('Error verifying token:', error);
         return NextResponse.redirect(new URL('/', request.url));
     }
 }

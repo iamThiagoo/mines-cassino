@@ -1,13 +1,13 @@
 import UsernameInputGroup from "@/components/layout/input/username-input-group";
 import BlurFade from "@/components/ui/blur-fade";
 import Image from "next/image";
-import Bomb from '@/assets/images/bomb.png';
+import Bomb from "@/assets/images/bomb.png";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Embarque nessa Aventura | Mines',
-  description: '...',
-}
+  title: "Embarque nessa Aventura | Mines",
+  description: "...",
+};
 
 export default function Home() {
   return (
@@ -20,11 +20,7 @@ export default function Home() {
         />
       </div>
       <div className="text-center justify-center items-center mt-3 px-2 md:px-0">
-        <BlurFade
-          inView={true}
-          inViewMargin="-50px"
-          delay={1}
-        >
+        <BlurFade inView={true} inViewMargin="-50px" delay={1}>
           <h2 className="font-medium text-xl">Mines</h2>
           <h3 className="text-2xl md:text-3xl lg:text-4xl font-black mb-2 sm:mb-4 tracking-tighter mt-2 md:mt-5">
             Explore, arrisque e descubra sua sorte em cada passo!

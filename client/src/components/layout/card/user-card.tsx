@@ -1,36 +1,23 @@
-'use client';
+"use client";
 
 import { useEffect, useState } from "react";
 import { getCookie } from "cookies-next";
+import { useUser } from "@/context/user.context";
 
 const UserCard = () => {
+  const { user } = useUser();
   const [greeting, setGreeting] = useState("");
-  const [username, setUsername] = useState("");
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      const username = (getCookie('username') as string) || "Visitante";
-      const hour = new Date().getHours();
-      let greetingMessage;
-      
-      if (hour >= 6 && hour < 12) {
-        greetingMessage = "Bom dia";
-      } else if (hour >= 12 && hour < 18) {
-        greetingMessage = "Boa tarde";
-      } else {
-        greetingMessage = "Boa noite";
-      }
-
-      setGreeting(greetingMessage);
-      setUsername(username);
-    };
-
-    fetchUserData();
+    const hour = new Date().getHours();
+    if (hour >= 6 && hour < 12) setGreeting("Bom dia");
+    else if (hour >= 12 && hour < 18) setGreeting("Boa tarde");
+    else setGreeting("Boa noite");
   }, []);
 
   return (
     <div className="text-base text-slate-300 md:text-gray-300 flex items-center gap-x-1 py-2 rounded-sm md:px-4 px-0 bg-gray-800">
-      {`${greeting}, ${username}!`}
+      {`${greeting}, ${user?.username || "Visitante"}!`}
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"

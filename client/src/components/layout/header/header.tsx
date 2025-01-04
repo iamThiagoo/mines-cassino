@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import Image from "next/image";
 import BlurFade from "@/components/ui/blur-fade";
@@ -9,11 +9,12 @@ import ExitDeleteAccount from "@/components/layout/dialog/exit-delete-account";
 import { useState } from "react";
 import { get } from "http";
 import { getCookie } from "cookies-next";
+import { useUser } from "@/context/user.context";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isLogged, setIsLogged] = useState(!!getCookie('token'));
-  
+  const { user } = useUser();
+
   return (
     <header className="container mx-auto max-w-7xl relative top-2 sm:top-5">
       <BlurFade inView={true} inViewMargin="-50px" delay={0.75}>
@@ -37,7 +38,7 @@ const Header = () => {
             <HowWorksDialog />
             <UserCard />
 
-            {isLogged && <ExitDeleteAccount />}
+            {user?.userId && <ExitDeleteAccount />}
           </ul>
 
           <div className="flex md:hidden">
@@ -114,7 +115,7 @@ const Header = () => {
                     <HowWorksDialog />
                   </ul>
                 </div>
-            )}
+              )}
             </div>
           </div>
         </nav>

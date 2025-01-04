@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -10,14 +10,16 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { useUser } from "@/context/user.context";
 import { toast } from "@/hooks/use-toast";
-import { deleteCookie, getCookie } from "cookies-next";
+import { deleteUserAccount } from "@/services/user.service";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const ExitDeleteAccountDialog = () => {
   const [isClient, setIsClient] = useState(false);
   const router = useRouter();
+  const { logout } = useUser();
 
   useEffect(() => {
     setIsClient(true);
@@ -25,30 +27,18 @@ const ExitDeleteAccountDialog = () => {
 
   const handleExitDeleteAccount = async () => {
     try {
-      const userId = getCookie("userId");
-      const token = getCookie("token");
-
-      const response = await fetch(`${process.env.NEXT_PUBLIC_NEST_URL}/user/${userId}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error("Erro ao deletar conta.");
-      }
-
-      ['userId', 'balance', 'username', 'token'].forEach(cookie => deleteCookie(cookie));
-      toast({title: "Conta deletada com sucesso!"});
-      router.push('/');
-    } catch (error) {
+      await deleteUserAccount();
+      logout();
+      toast({ title: "Conta deletada com sucesso!" });
+      router.push("/");
+    } catch (error: any) {
       console.error("Erro ao deletar conta:", error);
       toast({
         variant: "destructive",
         title: "Opsss... Algo deu errado!",
-        description: "Não foi possível sair e deletar sua conta. Tente novamente!",
+        description:
+          error.message ||
+          "Não foi possível sair e deletar sua conta. Tente novamente!",
       });
     }
   };
@@ -84,7 +74,10 @@ const ExitDeleteAccountDialog = () => {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancelar</AlertDialogCancel>
-          <AlertDialogAction onClick={() => handleExitDeleteAccount()} className="bg-red-700">
+          <AlertDialogAction
+            onClick={() => handleExitDeleteAccount()}
+            className="bg-red-700"
+          >
             Sair e Deletar Conta
           </AlertDialogAction>
         </AlertDialogFooter>

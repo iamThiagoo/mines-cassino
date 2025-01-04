@@ -4,56 +4,35 @@ import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import PulsatingButton from "@/components/ui/pulsating-button";
 import { toast } from "@/hooks/use-toast";
-import { setCookie } from "cookies-next/client";
-import { getCookie } from "cookies-next";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { createUser } from "@/services/user.service";
+import { useUser } from "@/context/user.context";
 
 const UsernameInputToggle = () => {
+  const { setUser } = useUser();
   const [showUsernameInput, setShowUsernameInput] = useState(false);
   const [username, setUsername] = useState("");
   const [isPosting, setIsPosting] = useState(false);
   const router = useRouter();
 
-  async function createUser(name: string): Promise<void> {
-    let nameFormat : string = name.trim();
-
-    if (!nameFormat) {
-      toast({
-        variant: "destructive",
-        title: "Opsss...",
-        description: "Nome de Usuário Inválido.",
-      });
-      return;
-    }
-
+  async function handleCreateUser(): Promise<void> {
     setIsPosting(true);
-
+    
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_NEST_URL}/user`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: nameFormat }),
+      const data = await createUser(username);
+
+      setUser({ 
+        token: data.access_token, 
+        username: data.username,
+        userId: data.userId,
+        balance: data.balance
       });
-      const data = await response.json();
-      if (!response.ok)
-        throw new Error(data.message || "Erro ao criar usuário");
-
-      const cookieOptions = {expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7)};
-
-      setCookie('userId', data.userId, cookieOptions);
-      setCookie('balance', data.balance, cookieOptions);
-      setCookie('username', data.username, cookieOptions);
-      setCookie('token', data.access_token, cookieOptions);
 
       toast({ title: "Usuário criado com sucesso!" });
       router.push('/game');
     } catch (error: any) {
       console.log(error);
-      toast({
-        variant: "destructive",
-        title: "Opsss... Algo deu errado!",
-        description: error.message,
-      });
+      toast({variant: "destructive", title: "Opsss... Algo deu errado!", description: error.message});
     } finally {
       setIsPosting(false);
     }
@@ -68,7 +47,7 @@ const UsernameInputToggle = () => {
             placeholder="Insira o Nome de Usuário"
             onChange={(e) => setUsername(e.target.value)}
           />
-          <PulsatingButton onClick={() => createUser(username)}>
+          <PulsatingButton onClick={handleCreateUser}>
             {isPosting ? (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
