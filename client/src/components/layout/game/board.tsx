@@ -1,65 +1,31 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import Bomb from "@/assets/images/bomb.png";
 import Gem from "@/assets/images/gem.png";
+import { GiTimeBomb } from "react-icons/gi";
+import { useUser } from "@/context/user.context";
+import { formatCurrency, numberToFloat } from "@/lib/utils";
+import FlipCard from "../card/flip-card";
+import { useGame } from "@/context/game.context";
 
 const Board = () => {
+  const { user } = useUser();
+  const [isClient, setIsClient] = useState(false)
+  const { game } = useGame();
+
   const rows = 5;
   const cols = 5;
 
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+
   const renderCell = (row: number, col: number) => {
     return (
-      <div
-        key={`${row}-${col}`}
-        className="cell w-full h-[8rem] border-4 border-gray-700 rounded-lg flex justify-center items-center bg-slate-900"
-      >
-        <svg
-          fill="#000000"
-          version="1.1"
-          id="Layer_1"
-          xmlns="http://www.w3.org/2000/svg"
-          className="size-24 -mt-0 -ml-1 fill-gray-800"
-          viewBox="796 796 200 200"
-          enableBackground="new 796 796 200 200"
-        >
-          <g>
-            <path
-              d="M889.414,877.934C889.413,877.934,889.414,877.934,889.414,877.934c-12.737,0-24.711,4.96-33.716,13.965
-		c-1.572,1.573-1.572,4.122,0,5.694c1.572,1.573,4.123,1.573,5.696,0c7.484-7.483,17.435-11.605,28.02-11.605
-		c10.584,0,20.538,4.123,28.023,11.606c0.786,0.787,1.817,1.181,2.847,1.18c1.031,0,2.062-0.393,2.848-1.18
-		c1.573-1.573,1.573-4.122,0-5.695C914.126,882.894,902.15,877.934,889.414,877.934z"
-            />
-            <path
-              d="M954.393,866.523c5.926-5.926,9.189-13.804,9.189-22.183c0-8.379-3.264-16.257-9.188-22.183
-		c-2.358-2.36-6.184-2.359-8.543,0c-2.36,2.359-2.36,6.184-0.002,8.543c3.644,3.644,5.651,8.488,5.651,13.641
-		c0,5.151-2.007,9.995-5.649,13.639l-2.168,2.167c0,0-0.001,0.001-0.001,0.001l-3.055-3.056c-1.835-1.834-4.322-2.864-6.916-2.864
-		s-5.081,1.03-6.914,2.864l-5.136,5.135c-0.566,0.568-1.431,0.716-2.155,0.369c-9.275-4.438-19.503-6.779-30.09-6.779
-		c-18.644,0-36.172,7.26-49.356,20.443c-27.214,27.215-27.214,71.495,0,98.708c13.184,13.185,30.711,20.445,49.355,20.445
-		c18.643,0,36.173-7.261,49.355-20.445c21.443-21.443,25.988-53.483,13.64-79.421c-0.346-0.723-0.197-1.585,0.37-2.153l5.16-5.161
-		c3.817-3.819,3.817-10.01,0-13.829l-5.715-5.714c0.001,0,0.001,0,0.001-0.001L954.393,866.523z M930.227,966.427
-		c-10.901,10.9-25.396,16.904-40.812,16.904c-15.416,0-29.91-6.004-40.811-16.904c-22.503-22.504-22.503-59.12,0-81.623
-		c10.902-10.9,25.396-16.904,40.813-16.904s29.911,6.003,40.812,16.904C952.728,907.307,952.728,943.922,930.227,966.427z"
-            />
-            <path
-              d="M935.287,817.365c0.785,0.786,1.817,1.18,2.848,1.18c1.029,0,2.061-0.393,2.848-1.179c1.573-1.572,1.573-4.123,0-5.696
-		l-6.304-6.305c-1.57-1.574-4.122-1.573-5.695,0c-1.573,1.573-1.573,4.122,0,5.696L935.287,817.365z"
-            />
-            <path
-              d="M924.316,830.503h8.915c2.225,0,4.028-1.803,4.028-4.028c0-2.224-1.804-4.027-4.028-4.027h-8.915
-		c-2.225,0-4.027,1.804-4.027,4.027C920.289,828.7,922.092,830.503,924.316,830.503z"
-            />
-            <path
-              d="M950.058,813.553c2.226,0,4.027-1.804,4.027-4.027v-8.915c0-2.225-1.802-4.028-4.027-4.028s-4.028,1.803-4.028,4.028v8.915
-		C946.029,811.749,947.832,813.553,950.058,813.553z"
-            />
-            <path
-              d="M971.171,805.275c-1.573-1.572-4.124-1.572-5.695,0l-6.304,6.305c-1.573,1.572-1.573,4.122,0,5.695
-		c0.787,0.786,1.817,1.18,2.848,1.18s2.063-0.394,2.847-1.18l6.304-6.305C972.744,809.398,972.744,806.848,971.171,805.275z"
-            />
-          </g>
-        </svg>
-      </div>
+      <FlipCard key={`${row}-${col}`} />
     );
   };
 
@@ -82,20 +48,26 @@ const Board = () => {
   return (
     <section>
       <div className="flex justify-between mb-4">
-        <Badge
-          variant="outline"
-          className="flex gap-x-2 text-white py-1 text-sm bg-gray-800"
-        >
-          Aposta: USD 1,00
-          <div>
-            <div className="bg-green-700 text-white relative px-1 text-xs rounded-sm">
-              2.32x
+
+        {game?.isStarted ? (
+          <Badge
+            variant="outline"
+            className="flex gap-x-2 text-white py-1 text-sm bg-gray-800"
+          >
+            Aposta: {formatCurrency(numberToFloat(game?.betAmount || 0))}
+            <div>
+              <div className="bg-green-700 text-white relative px-1 text-xs rounded-sm">
+              {game?.odd.toFixed(2)}x
+              </div>
             </div>
-          </div>
-        </Badge>
+          </Badge>
+        ) : (<div></div>)}
+        
         <Badge variant="outline" className="text-white text-sm bg-gray-800">
           Saldo Disponível:
-          <span className="text-green-400 ml-1"> USD 10000,00</span>
+          <span className="text-green-400 ml-1">
+            {isClient && (formatCurrency(numberToFloat(user?.balance || 0)))}
+          </span>
         </Badge>
       </div>
       <div className="grid grid-cols-1 gap-4">{renderGrid()}</div>

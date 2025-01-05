@@ -1,36 +1,34 @@
-const CurrencyInput = () => {
+import { FaMoneyBillTransfer } from "react-icons/fa6";
+
+interface CurrencyInputProps {
+  value: string;
+  onChange: (value: string) => void;
+}
+
+const CurrencyInput = ({ value, onChange }: CurrencyInputProps) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    onChange(event.target.value);
+  };
+
   return (
     <div className="flex">
       <div className="relative w-full">
         <div className="absolute inset-y-0 start-0 top-0 flex items-center ps-3.5 pointer-events-none">
-          <svg
-            className="w-4 h-4 text-gray-500 dark:text-gray-400"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 20 16"
-          >
-            <path
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M5 2a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1M2 5h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm8 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"
-            />
-          </svg>
+          <FaMoneyBillTransfer className="w-5 h-5 text-gray-500 dark:text-gray-400" />
         </div>
         <input
           type="number"
           id="currency-input"
-          className="block p-2.5 w-full z-20 ps-10 text-sm text-white rounded-s-lg bg-gray-800 border-e-gray-50 border-e-2 border border-gray-300 focus:ring-blue-400 focus:border-blue-500 dark:bg-gray-700 dark:border-e-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500  outline-none"
+          className="block p-2.5 w-full z-20 ps-12 text-sm text-white rounded-s-lg bg-gray-800 border-e-gray-50 border-e-2 border border-gray-300 focus:ring-blue-400 focus:border-blue-500 dark:bg-gray-700 dark:border-e-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500  outline-none"
           placeholder="Inserir Valor"
-          defaultValue={"1.00"}
+          value={value}
+          onChange={handleChange}
           required
         />
       </div>
       <div
         id="dropdown-currency-button"
-        className="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm  font-medium text-center bg-gray-800 text-white border border-gray-300 rounded-e-lg hover:bg-gray-200 dark:text-white"
+        className="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm  font-medium text-center bg-gray-800 text-white border border-gray-300 rounded-e-lg"
       >
         <svg
           fill="none"

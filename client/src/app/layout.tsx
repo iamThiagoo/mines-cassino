@@ -5,6 +5,7 @@ import Footer from "@/components/layout/footer/footer";
 import { Toaster } from "@/components/ui/toaster";
 import Header from "@/components/layout/header/header";
 import { UserProvider } from "@/context/user.context";
+import { GameProvider } from "@/context/game.context";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -28,14 +29,16 @@ export default function RootLayout({
       </head>
       <body className={`${inter.className} antialiased bg-background`}>
         <UserProvider>
-          <Header />
-          <main className="container flex justify-center mx-auto max-w-7xl min-h-[calc(100vh-90px)]">
-            <section className="sm:pt-6 pb-14 py-20 w-full relative flex-col overflow-hidden flex justify-center">
-              {children}
-              <Footer />
-            </section>
-          </main>
-          <Toaster />
+          <GameProvider>
+            <Header />
+            <main className="container flex justify-center mx-auto max-w-7xl min-h-[calc(100vh-90px)]">
+              <section className="sm:pt-6 pb-14 py-20 w-full relative flex-col overflow-hidden flex justify-center">
+                {children}
+                <Footer />
+              </section>
+            </main>
+            <Toaster />
+          </GameProvider>
         </UserProvider>
       </body>
     </html>

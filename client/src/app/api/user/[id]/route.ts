@@ -1,10 +1,15 @@
 import { NextResponse } from "next/server";
 
+interface RouteParams {
+	params: { id: string };
+}
+
 export async function DELETE(
 	request: Request,
-	{ params }: { params: { id: string } }
+	context: any
 ) {
 	try {
+		const { params } = context;
 		const authHeader = request.headers.get('authorization');
 		if (!authHeader) {
 			return NextResponse.json(
