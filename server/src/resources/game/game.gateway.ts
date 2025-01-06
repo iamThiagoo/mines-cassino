@@ -43,10 +43,12 @@ export class GameGateway {
     const game = await this.gameService.play(play, req.user);
 
     if (game.isGameOver) {
-      client.emit('game:finished', {
+      client.emit('game:finished-failed', {
         gameId: game.id,
         board: game.board,
         revealed: game.revealed,
+        row: play.row,
+        col: play.col,
         message: 'Game finished',
       });
     } else {
@@ -72,6 +74,8 @@ export class GameGateway {
       gameId: game.id,
       balance: user.balance,
       winAmount: game.winAmount,
+      odd: game.lastOdd,
+      hits: game.hits,
       board: game.board,
       revealed: game.revealed,
       message: 'Game finished successfully',

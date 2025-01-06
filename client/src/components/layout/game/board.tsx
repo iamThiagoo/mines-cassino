@@ -2,30 +2,45 @@
 
 import React, { useEffect, useState } from "react";
 import { Badge } from "@/components/ui/badge";
-import Image from "next/image";
-import Bomb from "@/assets/images/bomb.png";
-import Gem from "@/assets/images/gem.png";
-import { GiTimeBomb } from "react-icons/gi";
 import { useUser } from "@/context/user.context";
 import { formatCurrency, numberToFloat } from "@/lib/utils";
 import FlipCard from "../card/flip-card";
 import { useGame } from "@/context/game.context";
 
-const Board = () => {
+const Board = ({ clearBoard }: { clearBoard: boolean }) => {
   const { user } = useUser();
-  const [isClient, setIsClient] = useState(false)
-  const { game } = useGame();
+  const [isClient, setIsClient] = useState(false);
+  const { game, setGame } = useGame();
+  const [currentOdd, setCurrentOdd] = useState(game?.odd || 0);
+  const [userBalance, setUserBalance] = useState(user?.balance || 0);
 
   const rows = 5;
   const cols = 5;
 
   useEffect(() => {
-    setIsClient(true)
-  }, [])
+    setIsClient(true);
+  }, [game]);
+
+  useEffect(() => {
+    if (game?.odd) setCurrentOdd(game.odd);
+  }, [game?.odd]);
+
+  useEffect(() => {
+    if (user?.balance) setUserBalance(user?.balance);
+  }, [user?.balance]);
+
+  useEffect(() => {
+    setGame(null);
+  }, [clearBoard, setGame]);
 
   const renderCell = (row: number, col: number) => {
     return (
-      <FlipCard key={`${row}-${col}`} />
+      <FlipCard
+        key={`${row}-${col}`}
+        row={row}
+        col={col}
+        reset={clearBoard}
+      />
     );
   };
 
@@ -48,29 +63,32 @@ const Board = () => {
   return (
     <section>
       <div className="flex justify-between mb-4">
-
         {game?.isStarted ? (
           <Badge
             variant="outline"
-            className="flex gap-x-2 text-white py-1 text-sm bg-gray-800"
+            className="flex gap-x-2 h-7 text-white py-1 text-sm bg-gray-800"
           >
             Aposta: {formatCurrency(numberToFloat(game?.betAmount || 0))}
             <div>
               <div className="bg-green-700 text-white relative px-1 text-xs rounded-sm">
-              {game?.odd.toFixed(2)}x
+                {currentOdd.toFixed(2)}x
               </div>
             </div>
           </Badge>
-        ) : (<div></div>)}
-        
-        <Badge variant="outline" className="text-white text-sm bg-gray-800">
+        ) : (
+          <div></div>
+        )}
+
+        <Badge variant="outline" className="text-white h-7 text-sm bg-gray-800">
           Saldo Disponível:
           <span className="text-green-400 ml-1">
-            {isClient && (formatCurrency(numberToFloat(user?.balance || 0)))}
+            {isClient && formatCurrency(numberToFloat(userBalance))}
           </span>
         </Badge>
       </div>
-      <div className="grid grid-cols-1 gap-4">{renderGrid()}</div>
+      <section>
+        <div className="grid grid-cols-1 gap-4">{renderGrid()}</div>
+      </section>
     </section>
   );
 };
