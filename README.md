@@ -1,19 +1,21 @@
-# Mines - Cassino  
+# Mines - Cassino
 
-Esse repositório contém minha versão do jogo **Mines** inspirado na versão de jogos de azar de alguns cassinos.
+This repository contains my version of the **Mines** game inspired by the gambling versions from some casinos.
 
 ## Preview's
-<img src="assets/preview.gif" alt="Preview 1" width="47.5%" />
+<div style="display: flex; gap: 10px;">
+<img src="assets/preview.gif" alt="Preview 1" width="47%" />
 <img src="assets/preview_2.png" alt="Preview 2" width="45%" />
+</div>
 
-## 🎮 Sobre o Jogo  
-No Mines, os jogadores escolhem células em uma grade para evitar minas escondidas e ganhar multiplicadores. Cada célula segura aumenta os ganhos potenciais, mas o risco de encontrar uma mina também cresce.  
+## 🎮 About the Game
+In Mines, players choose cells in a grid to avoid hidden mines and earn multipliers. Each safe cell increases potential winnings, but the risk of hitting a mine grows as well.  
 
-Este projeto foi criado para explorar e recriar a dinâmica e a estratégia de um jogo de cassino moderno. Se for testar, não espere ganhar dinheiro no final, ok? ... também gostaria 😅
+This project was created to explore and recreate the dynamics and strategy of a modern casino game. If you decide to try it, don't expect to win money in the end, okay? ... I wish too 😅
 
 ---
 
-## 🚀 Tech's
+## 🚀 Tech Stack
 - NestJS (Jest)
 - NextJS (Shadcn Ui)
 - MongoDB
@@ -22,19 +24,18 @@ Este projeto foi criado para explorar e recriar a dinâmica e a estratégia de u
 
 ---
 
-## ▶️ Rodar a aplicação
-
-1. Garanta de ter o Docker e Docker Compose na sua máquina.
-2. Rode todas as aplicações com o comando:
+## ▶️ Running the Application
+1. Make sure you have Docker and Docker Compose installed on your machine.
+2. Run all applications with the command:
     ```bash
     docker-compose up -d
     ```
-3. Este comando irá subir todos os containers necessários para rodar todo o projeto
+3. This command will start all the necessary containers to run the entire project
 
 ---
 
-## 📊 Estratégia das ODD's 
-A estratégia usada para a definição das odds segue o modelo/multiplicador padrão da Stake (casa de aposta usada como consulta). Cada número de acertos corresponde a um multiplicador de recompensa. 
+## 📊 ODD's Strategy
+The strategy used to define the odds follows the standard model/multiplier of Stake (a betting platform used as reference). Each number of hits corresponds to a reward multiplier. 
 
 | Acertos | Odd        | Acertos | Odd        |  
 |:------|:------|:------:|------:|    
@@ -50,3 +51,6 @@ A estratégia usada para a definição das odds segue o modelo/multiplicador pad
 | 9       | 4.07x      | 21      | 569.3x     | 
 | 10      | 5.00x      | 22      | 2277x      |  
 | 11      | 6.26x      |
+
+## 📜 License
+- [MIT](LICENSE)
