@@ -52,7 +52,7 @@ const Board = ({ clearBoard }: { clearBoard: boolean }) => {
         cells.push(renderCell(row, col));
       }
       grid.push(
-        <div key={row} className="row flex gap-4">
+        <div key={row} className="row flex gap-4 flex-nowrap">
           {cells}
         </div>
       );
@@ -62,7 +62,7 @@ const Board = ({ clearBoard }: { clearBoard: boolean }) => {
 
   return (
     <section>
-      <div className="flex justify-between mb-4">
+      <div className="flex justify-between mb-4 px-3 lg:px-0">
         {game?.isStarted ? (
           <Badge
             variant="outline"
@@ -87,7 +87,7 @@ const Board = ({ clearBoard }: { clearBoard: boolean }) => {
         </Badge>
       </div>
       <section>
-        <div className="grid grid-cols-1 gap-4">{renderGrid()}</div>
+        <div className="flex justify-center flex-wrap lg:grid pt-5 px-4 sm:px-0 sm:pt-0 grid-cols-1 gap-4">{renderGrid()}</div>
       </section>
     </section>
   );

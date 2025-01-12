@@ -123,7 +123,7 @@ const BoardPanel: React.FC<BoardPanelProps> = ({ onClearBoard }) => {
   };
 
   return (
-    <section className="px-3 pt-2 border-r border-gray-600 pr-6 w-full">
+    <section className="px-3 sm:pt-2 lg:border-r border-gray-600 lg:pr-6 w-full">
       <div className="grid w-full max-w-full items-center gap-1.5">
         <h2 className="mb-2 font-medium">Valor da Aposta</h2>
         <CurrencyInput value={betValue} onChange={handleCurrencyInputChange} />
@@ -133,7 +133,7 @@ const BoardPanel: React.FC<BoardPanelProps> = ({ onClearBoard }) => {
         className="shadow-2xl mt-6" background={game?.isStarted ? '#ff4343': '#16283e'}
         onClick={game?.isStarted ? handleEndBet : handleStartBet}
       >
-        <span className="whitespace-pre-wrap text-center text-sm font-medium leading-none tracking-tight text-white dark:from-white dark:to-slate-900/10 lg:text-lg">
+        <span className="whitespace-pre-wrap text-center py-1 text-lg font-medium leading-none tracking-tight text-white dark:from-white dark:to-slate-900/10">
           {game?.isStarted ? "Encerrar Jogo" : "Iniciar Jogo"}
         </span>
       </ShimmerButton>
@@ -142,7 +142,7 @@ const BoardPanel: React.FC<BoardPanelProps> = ({ onClearBoard }) => {
         <a
           href="https://github.com/iamThiagoo/mines-cassino/issues"
           target="_blank"
-          className="w-full text-center mt-10 text-sm text-sky-600 hover:text-sky-500"
+          className="w-full hidden lg:block text-center mt-10 text-sm text-sky-600 hover:text-sky-500"
         >
           Reportar problema
         </a>

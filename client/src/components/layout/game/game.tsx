@@ -14,9 +14,9 @@ export default function GameContainer() {
   };
 
   return (
-    <div className="mt-3 px-1 md:px-0">
+    <div className="sm:mt-3 px-1 md:px-0">
       <BlurFade inView={true} inViewMargin="-50px" delay={1}>
-        <div className="text-gray-100 grid grid-cols-1 px-2 md:grid-cols-game gap-8 min-h-[calc(100vh-30vh)]">
+        <div className="text-gray-100 flex flex-col-reverse md:grid px-2 md:grid-cols-game gap-8 min-h-[calc(100vh-80vh)] sm:min-h-[calc(100vh-30vh)]">
           <BoardPanel onClearBoard={handleClearBoard} />
           <Board clearBoard={clearBoard} />
         </div>
