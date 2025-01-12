@@ -23,7 +23,7 @@ const BoardPanel: React.FC<BoardPanelProps> = ({ onClearBoard }) => {
   useEffect(() => {
     if (typeof window === "undefined" || !user?.token) return;
 
-    const socket = io(process.env.NEXT_PUBLIC_NEST_URL, {
+    const socket = io(process.env.NEXT_PUBLIC_NEST_SOCKET, {
       transports: ["websocket"],
       reconnection: true,
       auth: { token: `Bearer ${user?.token}` },

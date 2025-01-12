@@ -1,0 +1,21 @@
+FROM node:20-alpine
+
+ARG NEXT_PUBLIC_NEST_URL
+ARG NEXT_PUBLIC_NEST_SOCKET
+
+ENV NEXT_PUBLIC_NEST_URL=${NEXT_PUBLIC_NEST_URL}
+ENV NEXT_PUBLIC_NEST_SOCKET=${NEXT_PUBLIC_NEST_SOCKET}
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install --legacy-peer-deps
+
+COPY . .
+
+RUN npm run build
+
+EXPOSE 3001
+
+CMD ["npm", "run", "dev"]

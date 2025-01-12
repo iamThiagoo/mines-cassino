@@ -35,7 +35,7 @@ const FlipCard: React.FC<FlipCardProps> = ({ row, col, reset }) => {
   useEffect(() => {
     if (typeof window === "undefined" || !user?.token || !game) return;
 
-    const socket = io(process.env.NEXT_PUBLIC_NEST_URL, {
+    const socket = io(process.env.NEXT_PUBLIC_NEST_SOCKET, {
       transports: ["websocket"],
       reconnection: true,
       auth: { token: `Bearer ${user?.token}` },

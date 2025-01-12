@@ -1,0 +1,25 @@
+services:
+  api:
+    depends_on:
+      - mongo
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        APP_PORT: ${APP_PORT}
+        JWT_SECRET: ${JWT_SECRET}
+        INICIAL_USER_BALANCE: ${INICIAL_USER_BALANCE}
+        DATABASE_URL: ${DATABASE_URL}
+    expose:
+      - "${APP_PORT}"
+    ports:
+      - "${APP_PORT}:${APP_PORT}"
+    environment:
+      - NODE_ENV=production
+      - APP_PORT=${APP_PORT}
+      - JWT_SECRET=${JWT_SECRET}
+      - INICIAL_USER_BALANCE=${INICIAL_USER_BALANCE}
+      - DATABASE_URL=${DATABASE_URL}
+    restart: unless-stopped
+    networks:
+      - app-network

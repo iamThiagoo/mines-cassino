@@ -1,2 +1,8 @@
 include:
   - ./services/mongo/compose.yaml
+  - ./server/compose.yaml
+  - ./client/compose.yaml
+
+networks:
+  app-network:
+    driver: bridge
